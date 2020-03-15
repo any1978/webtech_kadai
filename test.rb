@@ -7,6 +7,7 @@ server = WEBrick::HTTPServer.new({
 ['INT', 'TERM'].each {|signal|
   Signal.trap(signal){ server.shutdown }
 }
+server.mount('/', WEBrick::HTTPServlet::ERBHandler, 'kadai.html.erb')
 server.mount('/kadai', WEBrick::HTTPServlet::ERBHandler, 'kadai.html.erb')
 server.mount('/indicate.cgi', WEBrick::HTTPServlet::CGIHandler, 'indicate.rb')
 # この一行を追記
